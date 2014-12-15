@@ -58,22 +58,31 @@
 # pragma mark connection delegate methods
 
 -(void)connection:(TCConnection*)connection didFailWithError:(NSError*)error {
+    if (self.connection != connection) {
+        return;
+    }
     [self javascriptErrorback:error];
 }
 
 -(void)connectionDidStartConnecting:(TCConnection*)connection {
-    self.connection = connection;
+    if (self.connection != connection) {
+        return;
+    }
     // What to do here? The JS library doesn't have an event for connection negotiation.
 }
 
 -(void)connectionDidConnect:(TCConnection*)connection {
-    self.connection = connection;
+    if (self.connection != connection) {
+        return;
+    }
     [self javascriptCallback:@"onconnect"];
     if([connection isIncoming]) [self javascriptCallback:@"onaccept"];
 }
 
 -(void)connectionDidDisconnect:(TCConnection*)connection {
-    self.connection = connection;
+    if (self.connection != connection) {
+        return;
+    }
     [self javascriptCallback:@"ondevicedisconnect"];
     [self javascriptCallback:@"onconnectiondisconnect"];
 }
@@ -110,7 +119,7 @@
 }
 
 -(void)connect:(CDVInvokedUrlCommand*)command {
-    [self.device connect:[command.arguments objectAtIndex:0] delegate:self];
+    self.connection = [self.device connect:[command.arguments objectAtIndex:0] delegate:self];
 }
 
 -(void)disconnectAll:(CDVInvokedUrlCommand*)command {
