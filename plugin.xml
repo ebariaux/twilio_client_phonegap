@@ -2,11 +2,11 @@
 <plugin xmlns="http://www.phonegap.com/ns/plugins/1.0"
     xmlns:android="http://schemas.android.com/apk/res/android"
     id="com.phonegap.plugins.twilioclient"
-    version="1.0.1">
+    version="1.0.2">
 
     <name>TwilioClient</name>
     <description>Use the native Twilio Client for iOS or Android wtih Cordova/PhoneGap and the Twilio Client JavaScript API</description>
-    <author>Stevie Graham/Lyle Pratt/Jeff Linwood</author>
+    <author>Stevie Graham/Lyle Pratt/Jeff Linwood/Eric Bariaux</author>
     <license>Apache</license>
 
     <js-module src="www/tcPlugin.js">
